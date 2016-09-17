@@ -13,6 +13,7 @@ public:
     int lineNumberAreaWidth();
 
     void setColorLineNumberArea(const QString &fg, const QString &bg);
+    void setTabWidth(int spaces);
 
 protected:
     void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;

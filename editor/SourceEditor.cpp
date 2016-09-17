@@ -26,6 +26,7 @@ SourceEditor::SourceEditor(QWidget *parent) : QPlainTextEdit(parent)
 
     updateLineNumberAreaWidth(0);
     highlightCurrentLine();
+    setTabWidth(4);
 }
 
 SourceEditor::~SourceEditor()
@@ -135,6 +136,12 @@ void SourceEditor::setColorLineNumberArea(const QString &fg, const QString &bg)
 {
     setColor(fg, m_colorLineNumberAreaForeground);
     setColor(bg, m_colorLineNumberAreaBackground);
+}
+
+void SourceEditor::setTabWidth(int spaces)
+{
+    QFontMetrics fontMetric(font());
+    setTabStopWidth(spaces * fontMetric.width(' '));
 }
 
 //void SourceEditor::setLineNumberAreaPadding(int left, int right)
