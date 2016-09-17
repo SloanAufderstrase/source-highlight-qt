@@ -8,36 +8,27 @@
  */
 
 #include <QString>
-
+#include <QDebug>
+#include <QTextStream>
+#include <QThread>
 #include "QtColorMap.h"
-#include <iostream>
 
-#include "asserttestexit.h"
-
-using namespace srchiliteqt;
+using namespace SrcHighlightQt;
 using namespace std;
 
-int main() {
-    cout << "test_colormap..." << endl;
-
+int main()
+{
     QtColorMap colorMap;
-    QtColorMapRGB colorMapRGB;
+    QTextStream in(stdin);
+    qDebug() << "Total items: (" << colorMap.count() << ")" << endl << "Press return to continue...";
 
-    // first simple check
-    assertEquals("darkblue", colorMapRGB.getColor("#000080"));
-
-    // check that the mapping is bidirectional
-    for (QtColorMap::const_iterator it = colorMap.begin(); it != colorMap.end(); ++it) {
-        assertEquals(colorMapRGB.getColor(it->second), it->first);
+    in.readLine();
+    QStringList keys = colorMap.keys();
+    QStringList vals = colorMap.values();
+    for(int i = 0; i < keys.size(); i++) {
+        qDebug() << "Forward/Reverse #" << i+1 << ": " << colorMap.getColor(keys[i].toStdString()).c_str()
+        << " / " << colorMap.getColor(vals[i].toStdString(),true).c_str();
     }
-
-    // check for non existing color in QtColorMapRGB (it must return the
-    // passed rgb string in this case)
-    assertEquals("#EEEEEE", colorMapRGB.getColor("#EEEEEE"));
-
-    // check for case insensitive
-    assertEquals("yellow", colorMapRGB.getColor("#FFCC00"));
-    assertEquals("yellow", colorMapRGB.getColor("#ffcc00"));
 
     return 0;
 }

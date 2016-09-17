@@ -22,31 +22,35 @@
 #include <iostream>
 
 // TEXINFOINCLUDE
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
     QApplication app(argc, argv);
 
-    if (argc <= 1) {
+    if (argc <= 1)
+    {
         std::cerr << "you must specify the file to edit" << std::endl;
         return 1;
     }
 
     QTextEdit *editor = new QTextEdit;
-    srchiliteqt::Qt4SyntaxHighlighter *highlighter =
-            new srchiliteqt::Qt4SyntaxHighlighter(editor->document());
+    SrcHighlightQt::Qt5SyntaxHighlighter *highlighter =
+        new SrcHighlightQt::Qt5SyntaxHighlighter(editor->document());
 
     QMainWindow win(0);
     win.setCentralWidget(editor);
 
     QFile file(argv[1]);
-    if (!file.open(QFile::ReadOnly | QFile::Text)) {
+    if (!file.open(QFile::ReadOnly | QFile::Text))
+    {
         std::cerr << QString("Cannot read file %1:\n%2.") .arg(argv[1]) .arg(
-                file.errorString()).toStdString() << std::endl;
+                      file.errorString()).toStdString() << std::endl;
         return 1;
     }
 
-    if (!highlighter->initFromFileName(argv[1])) {
+    if (!highlighter->initFromFileName(argv[1]))
+    {
         std::cerr << "cannot find an highlighting scheme for " << argv[1]
-                << std::endl;
+                  << std::endl;
         return 1;
     }
 

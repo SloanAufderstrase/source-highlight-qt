@@ -14,14 +14,15 @@
 
 #include "asserttestexit.h"
 
-using namespace srchiliteqt;
+using namespace SrcHighlightQt;
 using namespace srchilite;
 using namespace std;
 
 #undef main
 
-int main() {
-    Qt4SyntaxHighlighter *highlighter = new Qt4SyntaxHighlighter();
+int main()
+{
+    Qt5SyntaxHighlighter *highlighter = new Qt5SyntaxHighlighter();
 
     delete highlighter;
     return 0;

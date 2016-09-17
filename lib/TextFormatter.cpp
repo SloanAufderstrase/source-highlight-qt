@@ -5,13 +5,16 @@
 
 #include "TextFormatter.h"
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 TextFormatter::TextFormatter(const std::string &elem_) :
-    elem(elem_) {
+    elem(elem_)
+{
 }
 
-TextFormatter::~TextFormatter() {
+TextFormatter::~TextFormatter()
+{
 }
 
 }

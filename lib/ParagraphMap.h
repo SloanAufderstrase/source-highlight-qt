@@ -11,13 +11,15 @@
 
 #define STARTING_SIZE 100
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 /**
  * Internal class for mapping paragraph numbers to HighlightStateData.
  * Don't use this class directly!
  */
-class ParagraphMap {
+class ParagraphMap
+{
     typedef std::vector<HighlightStateData *> vectorType;
     vectorType dataVector;
 public:

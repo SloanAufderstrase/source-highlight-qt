@@ -6,24 +6,27 @@
 #include "Qt4SourceHighlightStyleGenerator.h"
 #include "QtColorMap.h"
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
-static QtColorMapRGB colorMapRGB;
-
-QStringList Qt4SourceHighlightStyleGenerator::createStyleContents(QList<
-        Qt4TextFormatter *> &formatters, const QString &bgColor) {
+QStringList Qt5SourceHighlightStyleGenerator::createStyleContents(QList<
+        Qt5TextFormatter *> &formatters, const QString &bgColor)
+{
+    QtColorMap colorMap;
     QStringList l;
 
-    if (bgColor != "") {
-        std::string color = colorMapRGB.getColor(bgColor.toStdString());
+    if (!bgColor.isEmpty())
+    {
+        std::string color = colorMap.getColor(bgColor.toStdString(), true);
         if (color[0] == '#')
             l << "bgcolor \"" + QString(color.c_str()) + "\";";
         else
             l << "bgcolor " + QString(color.c_str()) + ";";
     }
 
-    for (QList<Qt4TextFormatter *>::const_iterator it = formatters.begin(); it
-            != formatters.end(); ++it) {
+    for (QList<Qt5TextFormatter *>::const_iterator it = formatters.begin(); it
+            != formatters.end(); ++it)
+    {
         l << (*it)->toSourceHighlightStyleString();
     }
 

@@ -15,15 +15,16 @@
 
 #include "asserttestexit.h"
 
-using namespace srchiliteqt;
+using namespace SrcHighlightQt;
 using namespace srchilite;
 using namespace std;
 
 #undef main
 
-static void printFormatter(const Qt4TextFormatter *qt4Formatter);
+static void printFormatter(const Qt5TextFormatter *qt4Formatter);
 
-void printFormatter(const Qt4TextFormatter *qt4Formatter) {
+void printFormatter(const Qt5TextFormatter *qt4Formatter)
+{
     cout << qt4Formatter->getElem() << ": ";
     const QTextCharFormat &format = qt4Formatter->getQTextCharFormat();
     if (format.fontWeight() == QFont::Bold)
@@ -37,39 +38,40 @@ void printFormatter(const Qt4TextFormatter *qt4Formatter) {
     cout << endl;
 }
 
-int main() {
-    Qt4SyntaxHighlighter *highlighter = new Qt4SyntaxHighlighter();
+int main()
+{
+    Qt5SyntaxHighlighter *highlighter = new Qt5SyntaxHighlighter();
 
     highlighter->init("c.lang");
 
     FormatterManager *formatterManager = highlighter->getFormatterManager();
 
-    Qt4TextFormatter *qt4Formatter =
-            dynamic_cast<Qt4TextFormatter *> (formatterManager->getFormatter(
-                    "keyword").get());
+    Qt5TextFormatter *qt4Formatter =
+        dynamic_cast<Qt5TextFormatter *> (formatterManager->getFormatter(
+                "keyword").get());
 
     assertTrue(qt4Formatter != 0);
 
     printFormatter(qt4Formatter);
 
     // check that they do not share the same formatters (meaning their QTextCharFormat
-    Qt4SyntaxHighlighter *highlighter2 = new Qt4SyntaxHighlighter(0);
+    Qt5SyntaxHighlighter *highlighter2 = new Qt5SyntaxHighlighter(0);
     highlighter2->init("java.lang");
 
     assertTrue(
-            &(qt4Formatter->getQTextCharFormat()) !=
-            &(dynamic_cast<Qt4TextFormatter *> (highlighter2->getFormatterManager()->getFormatter(
-                    "keyword").get())->getQTextCharFormat()),
-                    "pointers should be different");
+        &(qt4Formatter->getQTextCharFormat()) !=
+        &(dynamic_cast<Qt5TextFormatter *> (highlighter2->getFormatterManager()->getFormatter(
+                "keyword").get())->getQTextCharFormat()),
+        "pointers should be different");
 
     // check that the Qt4TextFormatterMap has the same formatter
-    Qt4TextFormatterMap formatterMap = highlighter->getQt4TextFormatterMap();
+    Qt5TextFormatterMap formatterMap = highlighter->getQt5TextFormatterMap();
 
-    Qt4TextFormatter *keywordFormatter = formatterMap["keyword"];
+    Qt5TextFormatter *keywordFormatter = formatterMap["keyword"];
 
     assertEquals(
-                &(qt4Formatter->getQTextCharFormat()),
-                &(keywordFormatter->getQTextCharFormat()));
+        &(qt4Formatter->getQTextCharFormat()),
+        &(keywordFormatter->getQTextCharFormat()));
 
     delete highlighter;
     delete highlighter2;

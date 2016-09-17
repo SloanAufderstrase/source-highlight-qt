@@ -11,13 +11,15 @@
 
 #include "Qt4TextFormatter.h"
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 /**
  * Provides functionalities to generate the contents for a source-highlight
  * style file.
  */
-class Qt4SourceHighlightStyleGenerator {
+class Qt5SourceHighlightStyleGenerator
+{
 public:
     /**
      * Generates a string list given a list of Qt4TextFormatter
@@ -26,7 +28,7 @@ public:
      * @return a string list corresponding to the style file contents
      */
     static QStringList createStyleContents(
-            QList<Qt4TextFormatter *> &formatters, const QString &bgColor = "");
+        QList<Qt5TextFormatter *> &formatters, const QString &bgColor = "");
 };
 
 }

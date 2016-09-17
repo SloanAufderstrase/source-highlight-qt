@@ -13,14 +13,16 @@
 
 #include "asserttestexit.h"
 
-using namespace srchiliteqt;
+using namespace SrcHighlightQt;
 using namespace std;
 
-int main() {
+int main()
+{
     ParagraphMap paragraphMap;
 
     // check that initially all data pointers are 0
-    for (int i = 0; i < STARTING_SIZE; ++i) {
+    for (int i = 0; i < STARTING_SIZE; ++i)
+    {
         assertTrue(paragraphMap.getData(i) == 0, "data is not 0");
     }
 

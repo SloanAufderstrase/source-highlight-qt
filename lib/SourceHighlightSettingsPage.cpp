@@ -12,7 +12,8 @@
 #include "SourceHighlightSettingsPage.h"
 #include "ui_SourceHighlightSettingsPage.h"
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 SourceHighlightSettingsPage::SourceHighlightSettingsPage(QWidget *parent) :
     QWidget(parent),
@@ -26,7 +27,8 @@ SourceHighlightSettingsPage::SourceHighlightSettingsPage(QWidget *parent) :
 
     // defaults to current source-highlight settings
     QString currentPath = getSourceHighlightDataDirPath();
-    if (currentPath.isEmpty()) {
+    if (currentPath.isEmpty())
+    {
         currentPath = srchilite::Settings::retrieveDataDir().c_str();
     }
     setSourceHighlightDataDirPath(currentPath);
@@ -43,39 +45,46 @@ SourceHighlightSettingsPage::~SourceHighlightSettingsPage()
     delete sourceHighlightSettings;
 }
 
-void SourceHighlightSettingsPage::setSourceHighlightDataDirPath(const QString &path) {
+void SourceHighlightSettingsPage::setSourceHighlightDataDirPath(const QString &path)
+{
     ui->sourceHighlightDataDirLineEdit->setText(path);
 }
 
-const QString SourceHighlightSettingsPage::getSourceHighlightDataDirPath() const {
+const QString SourceHighlightSettingsPage::getSourceHighlightDataDirPath() const
+{
     return ui->sourceHighlightDataDirLineEdit->text();
 }
 
 void SourceHighlightSettingsPage::browseDir()
 {
     QString directory = QFileDialog::getExistingDirectory(this,
-                                tr("Source-highlight data dir path"),
-                                getSourceHighlightDataDirPath(),
-                                QFileDialog::ShowDirsOnly);
+                        tr("Source-highlight data dir path"),
+                        getSourceHighlightDataDirPath(),
+                        QFileDialog::ShowDirsOnly);
 
-     if (!directory.isEmpty()) {
-         setSourceHighlightDataDirPath(directory);
-     }
+    if (!directory.isEmpty())
+    {
+        setSourceHighlightDataDirPath(directory);
+    }
 
 }
 
 void SourceHighlightSettingsPage::defaultDir()
 {
-     setSourceHighlightDataDirPath(srchilite::Settings::getDefaultDataDir().c_str());
+    setSourceHighlightDataDirPath(srchilite::Settings::getDefaultDataDir().c_str());
 }
 
-void SourceHighlightSettingsPage::validateDir(const QString &path) {
+void SourceHighlightSettingsPage::validateDir(const QString &path)
+{
     sourceHighlightSettings->setDataDir(path.toStdString());
 
-    if (sourceHighlightSettings->checkForTestFile()) {
+    if (sourceHighlightSettings->checkForTestFile())
+    {
         ui->errorLabel->setVisible(false);
         ui->okLabel->setVisible(true);
-    } else {
+    }
+    else
+    {
         ui->errorLabel->setVisible(true);
         ui->okLabel->setVisible(false);
     }
@@ -84,7 +93,8 @@ void SourceHighlightSettingsPage::validateDir(const QString &path) {
 void SourceHighlightSettingsPage::changeEvent(QEvent *e)
 {
     QWidget::changeEvent(e);
-    switch (e->type()) {
+    switch (e->type())
+    {
     case QEvent::LanguageChange:
         ui->retranslateUi(this);
         break;

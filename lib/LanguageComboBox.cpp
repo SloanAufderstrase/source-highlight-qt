@@ -7,37 +7,44 @@
 
 #include <srchilite/sourcehighlightutils.h>
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
-LanguageComboBox::LanguageComboBox(const QString &path) {
+LanguageComboBox::LanguageComboBox(const QString &path)
+{
     setToolTip(tr("choose the language definition for highlighting."));
 
     reload(path);
 }
 
 LanguageComboBox::LanguageComboBox(
-        srchiliteqt::Qt4SyntaxHighlighter *highlighter) {
+    SrcHighlightQt::Qt5SyntaxHighlighter *highlighter)
+{
     setToolTip(tr("choose the language definition for highlighting."));
 
     std::set<std::string> langfiles =
-            highlighter->getLangMap()->getMappedFileNames();
+        highlighter->getLangMap()->getMappedFileNames();
     for (std::set<std::string>::const_iterator it = langfiles.begin(); it
-            != langfiles.end(); ++it) {
+            != langfiles.end(); ++it)
+    {
         addItem(QString((*it).c_str()));
     }
 }
 
-void LanguageComboBox::setCurrentLanguage(const QString &lang) {
+void LanguageComboBox::setCurrentLanguage(const QString &lang)
+{
     int item = findText(lang);
     if (item != -1)
         setCurrentIndex(item);
 }
 
-const QString LanguageComboBox::getCurrentLanguage() const {
+const QString LanguageComboBox::getCurrentLanguage() const
+{
     return currentText();
 }
 
-void LanguageComboBox::reload(const QString &path) {
+void LanguageComboBox::reload(const QString &path)
+{
     const QString &currentItem = getCurrentLanguage();
 
     // make sure we block signals when we reload the contents
@@ -47,9 +54,10 @@ void LanguageComboBox::reload(const QString &path) {
     clear();
 
     srchilite::StringSet files =
-            srchilite::SourceHighlightUtils::getLangFileNames(path.toStdString());
+        srchilite::SourceHighlightUtils::getLangFileNames(path.toStdString());
     for (srchilite::StringSet::const_iterator it = files.begin(); it
-            != files.end(); ++it) {
+            != files.end(); ++it)
+    {
         addItem(QString((*it).c_str()));
     }
 

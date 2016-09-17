@@ -13,7 +13,8 @@
 #include "TextFormatter.h"
 #include "QtColorMap.h"
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 using std::string;
 
@@ -23,7 +24,8 @@ typedef std::map<string, TextFormatterPtr> TextFormatterMap;
  * Specialization of FormatterFactory to create TextFormatter objects
  * to format text in a TextEdit.
  */
-class TextFormatterFactory: public srchilite::FormatterFactory {
+class TextFormatterFactory: public srchilite::FormatterFactory
+{
 protected:
     TextFormatterMap textFormatterMap;
 
@@ -62,11 +64,13 @@ public:
     /**
      * @return the TextFormatterMap
      */
-    const TextFormatterMap &getTextFormatterMap() const {
+    const TextFormatterMap &getTextFormatterMap() const
+    {
         return textFormatterMap;
     }
 
-    bool isDefaultToMonospace() const {
+    bool isDefaultToMonospace() const
+    {
         return defaultToMonospace;
     }
 
@@ -76,7 +80,8 @@ public:
      *
      * @param d
      */
-    void setDefaultToMonospace(bool d) {
+    void setDefaultToMonospace(bool d)
+    {
         defaultToMonospace = d;
     }
 };

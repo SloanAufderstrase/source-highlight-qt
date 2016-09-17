@@ -82,8 +82,9 @@ public:
 
 };
 
-namespace Ui {
-    class ColorDialog: public Ui_ColorDialog {};
+namespace Ui
+{
+class ColorDialog: public Ui_ColorDialog {};
 } // namespace Ui
 
 QT_END_NAMESPACE

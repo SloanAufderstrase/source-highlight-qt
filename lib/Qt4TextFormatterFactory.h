@@ -8,16 +8,18 @@
 
 #include "TextFormatterFactory.h"
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 /**
  * Implementation of TextFormatterFactory to create Qt4 TextFormatter objects
  * to format text in a TextEdit.
  */
-class Qt4TextFormatterFactory: public TextFormatterFactory {
+class Qt5TextFormatterFactory: public TextFormatterFactory
+{
 public:
-    Qt4TextFormatterFactory();
-    virtual ~Qt4TextFormatterFactory();
+    Qt5TextFormatterFactory();
+    virtual ~Qt5TextFormatterFactory();
 
     /**
      * Creates a formatter for the specific language element (identified by
@@ -30,7 +32,7 @@ public:
      * @return false if a formatter for the specific key is already present
      */
     virtual bool createFormatter(const string &key, const string &color,
-            const string &bgcolor, srchilite::StyleConstantsPtr styleconstants);
+                                 const string &bgcolor, srchilite::StyleConstantsPtr styleconstants);
 
 };
 

@@ -9,17 +9,20 @@
 #include <QtWidgets>
 #include <QColor>
 
-namespace Ui {
-    class MainColorForm;
+namespace Ui
+{
+class MainColorForm;
 }
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 /**
   * A form that can be used to select the color of the
   * main font of the editor
   */
-class MainColorForm : public QWidget {
+class MainColorForm : public QWidget
+{
     Q_OBJECT
     Q_DISABLE_COPY(MainColorForm)
 public:
@@ -41,14 +44,16 @@ public:
     /**
       * @return the color of the foreground (might be invalid)
       */
-    const QColor &getColor() const {
+    const QColor &getColor() const
+    {
         return foreground;
     }
 
     /**
       * @return the color of the background (might be invalid)
       */
-    const QColor &getBackgroundColor() const {
+    const QColor &getBackgroundColor() const
+    {
         return background;
     }
 

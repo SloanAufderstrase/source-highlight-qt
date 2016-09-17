@@ -23,17 +23,21 @@ static std::exception std_exception;
  * returns the string representing a standard exception (which
  * can be different from system to system)
  */
-const std::string stdExceptionToString() {
+const std::string stdExceptionToString()
+{
     return std_exception.what();
 }
 
-const std::string stdCausedBy() {
+const std::string stdCausedBy()
+{
     return "Caused by: " + stdExceptionToString();
 }
 
 template<typename T>
-void assertEquals(T expected, T actual) {
-    if (expected != actual) {
+void assertEquals(T expected, T actual)
+{
+    if (expected != actual)
+    {
         std::cerr << "assertEquals failed" << std::endl;
         std::cerr << "expected: " << expected << std::endl;
         std::cerr << "actual  : " << actual << std::endl;
@@ -43,7 +47,8 @@ void assertEquals(T expected, T actual) {
 }
 
 template<typename T2>
-void assertEqualsException(const std::string &expected, T2 actual) {
+void assertEqualsException(const std::string &expected, T2 actual)
+{
     std::ostringstream o;
 
     o << actual;
@@ -51,8 +56,10 @@ void assertEqualsException(const std::string &expected, T2 actual) {
     assertEquals(expected, o.str());
 }
 
-void assertEquals(const std::string &expected, const std::string &actual) {
-    if (expected != actual) {
+void assertEquals(const std::string &expected, const std::string &actual)
+{
+    if (expected != actual)
+    {
         std::cerr << "assertEquals failed" << std::endl;
         std::cerr << "expected: " << expected << std::endl;
         std::cerr << "actual  : " << actual << std::endl;
@@ -61,20 +68,26 @@ void assertEquals(const std::string &expected, const std::string &actual) {
     }
 }
 
-void assertTrue(bool actual, const std::string &error = "") {
-    if (!actual) {
+void assertTrue(bool actual, const std::string &error = "")
+{
+    if (!actual)
+    {
         std::cerr << "assertion failed!" << std::endl;
-        if (error.size()) {
+        if (error.size())
+        {
             std::cerr << error << std::endl;
         }
         exit(EXIT_FAILURE);
     }
 }
 
-void assertFalse(bool actual, const std::string &error = "") {
-    if (actual) {
+void assertFalse(bool actual, const std::string &error = "")
+{
+    if (actual)
+    {
         std::cerr << "assertion failed!" << std::endl;
-        if (error.size()) {
+        if (error.size())
+        {
             std::cerr << error << std::endl;
         }
         exit(EXIT_FAILURE);
@@ -82,7 +95,8 @@ void assertFalse(bool actual, const std::string &error = "") {
 }
 
 template<typename T1, typename T2>
-void assertEqualsCollections(const T1 &expected, const T2 &actual) {
+void assertEqualsCollections(const T1 &expected, const T2 &actual)
+{
     assertEquals(expected.size(), actual.size());
 
     typename T1::const_iterator it1 = expected.begin();

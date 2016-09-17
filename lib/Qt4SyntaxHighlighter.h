@@ -14,13 +14,14 @@
 #include "GNUSyntaxHighlighter.h"
 #include "Qt4TextFormatter.h"
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 /// the map of Qt4TextFormatters
-typedef QMap<QString, Qt4TextFormatter *> Qt4TextFormatterMap;
+typedef QMap<QString, Qt5TextFormatter *> Qt5TextFormatterMap;
 
 /// the iterator for Qt4TextFormatterMap
-typedef QMapIterator<QString, Qt4TextFormatter *> Qt4TextFormatterMapIterator;
+typedef QMapIterator<QString, Qt5TextFormatter *> Qt5TextFormatterMapIterator;
 
 /**
  * An implementation of QSyntaxHighlighter using GNU Source-highlight library
@@ -35,8 +36,9 @@ typedef QMapIterator<QString, Qt4TextFormatter *> Qt4TextFormatterMapIterator;
     highlighter->init("java.lang");
  * @endcode
  */
-class Qt4SyntaxHighlighter: public QSyntaxHighlighter,
-        public GNUSyntaxHighlighter {
+class Qt5SyntaxHighlighter: public QSyntaxHighlighter,
+    public GNUSyntaxHighlighter
+{
 
     /// the current style file for highlighting
     QString currentStyleFile;
@@ -56,8 +58,8 @@ protected:
     void setFormatters(const TextFormatterMap &formatterMap);
 
 public:
-    Qt4SyntaxHighlighter(QTextDocument *doc = 0);
-    virtual ~Qt4SyntaxHighlighter();
+    Qt5SyntaxHighlighter(QTextDocument *doc = 0);
+    virtual ~Qt5SyntaxHighlighter();
 
     /**
      * Initializes this highlighter with the specified language definition file
@@ -67,7 +69,7 @@ public:
      * @throws ParserException in case of parsing error of the lang file or of the style file
      */
     void init(const QString &langFile, const QString &styleFile =
-            "default.style");
+                  "default.style");
 
     /**
      * Initializes this highlighter by using the file name for detecting
@@ -93,7 +95,8 @@ public:
      * TextFormatter, from Source-highglight library code, and relies on
      * the corresponding protected method of QSyntaxHighlighter: setFormat).
      */
-    void formatString(int start, int count, const QTextCharFormat & format) {
+    void formatString(int start, int count, const QTextCharFormat & format)
+    {
         setFormat(start, count, format);
     }
 
@@ -109,7 +112,8 @@ public:
     void setFormattingStyle(const QString &styleFile);
 
     /// @return the current style file used for highlighting
-    const QString getFormattingStyle() const {
+    const QString getFormattingStyle() const
+    {
         return currentStyleFile;
     }
 
@@ -130,7 +134,8 @@ public:
      * are already of Qt4TextFormatter type (and the formatters are exactly the same).
      * @return the
      */
-    const srchilite::FormatterMap &getFormatterMap() const {
+    const srchilite::FormatterMap &getFormatterMap() const
+    {
         return formatterManager->getFormatterMap();
     }
 
@@ -140,7 +145,7 @@ public:
      * changing formatters.
      * @return the map of Qt4TextFormatters used by this highlighter
      */
-    Qt4TextFormatterMap getQt4TextFormatterMap();
+    Qt5TextFormatterMap getQt5TextFormatterMap();
 };
 
 }

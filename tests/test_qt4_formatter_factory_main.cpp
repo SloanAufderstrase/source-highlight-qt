@@ -18,13 +18,14 @@
 
 #undef main
 
-using namespace srchiliteqt;
+using namespace SrcHighlightQt;
 using namespace srchilite;
 using namespace std;
 
-static void printFormatter(const Qt4TextFormatter *qt4Formatter);
+static void printFormatter(const Qt5TextFormatter *qt4Formatter);
 
-void printFormatter(const Qt4TextFormatter *qt4Formatter) {
+void printFormatter(const Qt5TextFormatter *qt4Formatter)
+{
     cout << qt4Formatter->getElem() << ": ";
     const QTextCharFormat &format = qt4Formatter->getQTextCharFormat();
     if (format.fontWeight() == QFont::Bold)
@@ -42,8 +43,9 @@ void printFormatter(const Qt4TextFormatter *qt4Formatter) {
     cout << endl;
 }
 
-int main() {
-    Qt4TextFormatterFactory formatterFactory;
+int main()
+{
+    Qt5TextFormatterFactory formatterFactory;
     bool result = false;
 
     StyleConstantsPtr styleConstants(new StyleConstants);
@@ -62,23 +64,23 @@ int main() {
 
     assertTrue(formatter.get() != 0);
 
-    Qt4TextFormatter *qt4Formatter =
-            dynamic_cast<Qt4TextFormatter *> (formatter.get());
+    Qt5TextFormatter *qt4Formatter =
+        dynamic_cast<Qt5TextFormatter *> (formatter.get());
 
     assertTrue(qt4Formatter != 0);
 
     printFormatter(qt4Formatter);
 
     assertTrue(qt4Formatter->getQTextCharFormat().fontWeight() == QFont::Bold,
-            "not bold");
+               "not bold");
     assertTrue(!qt4Formatter->getQTextCharFormat().fontItalic(),
-            "italic, but should not be");
+               "italic, but should not be");
     assertTrue(qt4Formatter->getQTextCharFormat().fontUnderline(),
-            "not underline");
+               "not underline");
 
     // now try with colors
     result = formatterFactory.createFormatter("foocolor", "green", "red",
-            styleConstants);
+             styleConstants);
 
     assertTrue(result);
 
@@ -86,19 +88,19 @@ int main() {
 
     assertTrue(formatter.get() != 0);
 
-    qt4Formatter = dynamic_cast<Qt4TextFormatter *> (formatter.get());
+    qt4Formatter = dynamic_cast<Qt5TextFormatter *> (formatter.get());
 
     assertTrue(qt4Formatter != 0);
 
     assertTrue(qt4Formatter->getQTextCharFormat().fontWeight() == QFont::Bold,
-            "not bold");
+               "not bold");
     assertTrue(!qt4Formatter->getQTextCharFormat().fontItalic(),
-            "italic, but should not be");
+               "italic, but should not be");
     assertTrue(qt4Formatter->getQTextCharFormat().fontUnderline(),
-            "not underline");
+               "not underline");
 
     cout << "green: " << TextFormatterFactory::colorMap.getColor("green")
-            << endl;
+         << endl;
     cout << "red: " << TextFormatterFactory::colorMap.getColor("red") << endl;
 
     assertEquals("#33CC00", TextFormatterFactory::colorMap.getColor("green"));
@@ -110,37 +112,37 @@ int main() {
     assertEquals("#33cc00", color.name().toStdString());
 
     cout << "foreground: "
-            << qt4Formatter->getQTextCharFormat().foreground().color().name().toStdString()
-            << endl;
+         << qt4Formatter->getQTextCharFormat().foreground().color().name().toStdString()
+         << endl;
     cout << "background: "
-            << qt4Formatter->getQTextCharFormat().background().color().name().toStdString()
-            << endl;
+         << qt4Formatter->getQTextCharFormat().background().color().name().toStdString()
+         << endl;
 
     assertEquals(
-            "#33cc00",
-            qt4Formatter->getQTextCharFormat().foreground().color().name().toStdString());
+        "#33cc00",
+        qt4Formatter->getQTextCharFormat().foreground().color().name().toStdString());
     assertEquals(
-            "#ff0000",
-            qt4Formatter->getQTextCharFormat().background().color().name().toStdString());
+        "#ff0000",
+        qt4Formatter->getQTextCharFormat().background().color().name().toStdString());
 
     // now try to use the functionalities of GNUSyntaxHighlighter to read a style file
     GNUSyntaxHighlighter h;
-    Qt4TextFormatterFactory formatterFactory2;
+    Qt5TextFormatterFactory formatterFactory2;
 
     // this will fill the formatter factory by reading the style file
     h.getTextFormatterMap(formatterFactory2);
 
     // the formatter for keyword and todo must be defined now
     qt4Formatter
-            = dynamic_cast<Qt4TextFormatter *> (formatterFactory2.getFormatter(
-                    "keyword").get());
+        = dynamic_cast<Qt5TextFormatter *> (formatterFactory2.getFormatter(
+                "keyword").get());
 
     assertTrue(qt4Formatter != 0);
     printFormatter(qt4Formatter);
 
     qt4Formatter
-            = dynamic_cast<Qt4TextFormatter *> (formatterFactory2.getFormatter(
-                    "todo").get());
+        = dynamic_cast<Qt5TextFormatter *> (formatterFactory2.getFormatter(
+                "todo").get());
 
     assertTrue(qt4Formatter != 0);
     printFormatter(qt4Formatter);
@@ -149,31 +151,31 @@ int main() {
     h.getTextFormatterMap(formatterFactory2);
 
     assertEquals(qt4Formatter,
-            dynamic_cast<Qt4TextFormatter *> (formatterFactory2.getFormatter(
-                    "todo").get()));
+                 dynamic_cast<Qt5TextFormatter *> (formatterFactory2.getFormatter(
+                             "todo").get()));
 
     // check that the formatter factory is shared among the GNUSyntaxHighlighters
     GNUSyntaxHighlighter h2;
     h2.getTextFormatterMap(formatterFactory2);
 
     assertEquals(qt4Formatter,
-            dynamic_cast<Qt4TextFormatter *> (formatterFactory2.getFormatter(
-                    "todo").get()));
+                 dynamic_cast<Qt5TextFormatter *> (formatterFactory2.getFormatter(
+                             "todo").get()));
 
     // test the translation into source-highlight style file format
     QString translated;
     formatterFactory.createFormatter("keyword", "blue", "", styleConstants);
     qt4Formatter
-            = dynamic_cast<Qt4TextFormatter *> (formatterFactory.getFormatter(
-                    "keyword").get());
+        = dynamic_cast<Qt5TextFormatter *> (formatterFactory.getFormatter(
+                "keyword").get());
     translated = qt4Formatter->toSourceHighlightStyleString();
     cout << "translated: " << translated.toStdString() << endl;
     assertEquals("keyword blue b, u, f;", translated.toStdString());
 
     formatterFactory.createFormatter("todo", "", "cyan", StyleConstantsPtr());
     qt4Formatter
-            = dynamic_cast<Qt4TextFormatter *> (formatterFactory.getFormatter(
-                    "todo").get());
+        = dynamic_cast<Qt5TextFormatter *> (formatterFactory.getFormatter(
+                "todo").get());
     translated = qt4Formatter->toSourceHighlightStyleString();
     cout << "translated: " << translated.toStdString() << endl;
     assertEquals("todo bg:cyan f;", translated.toStdString());

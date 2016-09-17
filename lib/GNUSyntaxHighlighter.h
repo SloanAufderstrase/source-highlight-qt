@@ -16,14 +16,16 @@
 #include "TextFormatterFactory.h"
 #include "HighlightStateData.h"
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 /**
  * An abstract class using GNU Source-highlight library to perform syntax highlighting.
  * You must use one of the concrete classes, depending on the version of Qt that you're
  * using, e.g., Qt4SyntaxHighlighter or Qt3SyntaxHighlighter.
  */
-class GNUSyntaxHighlighter {
+class GNUSyntaxHighlighter
+{
     /// the lang file used by this highlighter
     QString langFile;
 
@@ -58,7 +60,10 @@ public:
     GNUSyntaxHighlighter();
     virtual ~GNUSyntaxHighlighter();
 
-    const QString &getLangFile() const { return langFile; }
+    const QString &getLangFile() const
+    {
+        return langFile;
+    }
 
     /**
      * Given a language definition file name, returns the corresponding
@@ -90,7 +95,8 @@ public:
     /**
      * @return the Source-highlight SourceHighlighter (can be null)
      */
-    srchilite::SourceHighlighter *getHighlighter() const {
+    srchilite::SourceHighlighter *getHighlighter() const
+    {
         return sourceHighlighter;
     }
 
@@ -108,13 +114,14 @@ public:
      * @throws ParserException in case of parsing error of the style file
      */
     const TextFormatterMap &getTextFormatterMap(
-            TextFormatterFactory &formatterFactory,
-            const QString &styleFile = "default.style");
+        TextFormatterFactory &formatterFactory,
+        const QString &styleFile = "default.style");
 
     /**
      * @return the Source-highlight FormatterManager
      */
-    srchilite::FormatterManager *getFormatterManager() const {
+    srchilite::FormatterManager *getFormatterManager() const
+    {
         return formatterManager;
     }
 
@@ -156,29 +163,34 @@ public:
     /**
      * @return the foreground color string (can be empty)
      */
-    const QString &getForegroundColor() const {
+    const QString &getForegroundColor() const
+    {
         return foregroundColor;
     }
 
     /**
      * @return the background color string (can be empty)
      */
-    const QString &getBackgroundColor() const {
+    const QString &getBackgroundColor() const
+    {
         return backgroundColor;
     }
 
-    void setForegroundColor(const QString &f) {
+    void setForegroundColor(const QString &f)
+    {
         foregroundColor = f;
     }
 
-    void setBackgroundColor(const QString &b) {
+    void setBackgroundColor(const QString &b)
+    {
         backgroundColor = b;
     }
 
     /**
      * @return whether we must highlight readonly contents
      */
-    bool isReadOnly() const {
+    bool isReadOnly() const
+    {
         return readOnly;
     }
 
@@ -189,11 +201,13 @@ public:
      *
      * @param r
      */
-    void setReadOnly(bool r) {
+    void setReadOnly(bool r)
+    {
         readOnly = r;
     }
 
-    bool isDefaultToMonospace() const {
+    bool isDefaultToMonospace() const
+    {
         return defaultToMonospace;
     }
 
@@ -203,7 +217,8 @@ public:
      *
      * @param d
      */
-    void setDefaultToMonospace(bool d) {
+    void setDefaultToMonospace(bool d)
+    {
         defaultToMonospace = d;
     }
 };

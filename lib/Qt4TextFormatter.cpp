@@ -18,43 +18,48 @@
 #define DEBUG_INFO(x,y)
 #endif
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
-/// used for translation into source-highlight style format
-static QtColorMapRGB colorMapRGB;
-
-Qt4TextFormatter::Qt4TextFormatter(const std::string &elem_) :
-    TextFormatter(elem_), qSyntaxHighlighter(0) {
+Qt5TextFormatter::Qt5TextFormatter(const std::string &elem_) :
+    TextFormatter(elem_), qSyntaxHighlighter(0)
+{
 }
 
-Qt4TextFormatter::~Qt4TextFormatter() {
+Qt5TextFormatter::~Qt5TextFormatter()
+{
 }
 
-void Qt4TextFormatter::setQSyntaxHighlighter(
-        QSyntaxHighlighter *qSyntaxHighlighter_) {
+void Qt5TextFormatter::setQSyntaxHighlighter(
+    QSyntaxHighlighter *qSyntaxHighlighter_)
+{
     qSyntaxHighlighter
-            = dynamic_cast<Qt4SyntaxHighlighter *> (qSyntaxHighlighter_);
+        = dynamic_cast<Qt5SyntaxHighlighter *> (qSyntaxHighlighter_);
 }
 
-void Qt4TextFormatter::format(const std::string &s,
-        const srchilite::FormatterParams *params) {
+void Qt5TextFormatter::format(const std::string &s,
+                              const srchilite::FormatterParams *params)
+{
 
     qSyntaxHighlighter->formatString(params->start, s.size(), textFormat);
 
     DEBUG_INFO (s + "\n", toString().toStdString());
 }
 
-void Qt4TextFormatter::setForegroundColor(const QColor &color) {
+void Qt5TextFormatter::setForegroundColor(const QColor &color)
+{
     textFormat.setForeground(QBrush(color));
     foregroundColor = color;
 }
 
-void Qt4TextFormatter::setBackgroundColor(const QColor &color) {
+void Qt5TextFormatter::setBackgroundColor(const QColor &color)
+{
     textFormat.setBackground(QBrush(color));
     backgroundColor = color;
 }
 
-const QString Qt4TextFormatter::toString() const {
+const QString Qt5TextFormatter::toString() const
+{
     QString s = QString(getElem().c_str()) + ": ";
     const QTextCharFormat & format = getQTextCharFormat();
     if (format.fontWeight() == QFont::Bold)
@@ -76,24 +81,25 @@ const QString Qt4TextFormatter::toString() const {
     return s;
 }
 
-const QString Qt4TextFormatter::toSourceHighlightStyleString() const {
+const QString Qt5TextFormatter::toSourceHighlightStyleString() const
+{
     QString s = QString(getElem().c_str()) + " ";
     const QTextCharFormat & format = getQTextCharFormat();
     std::string color;
 
-    if (getForegroundColor().isValid()) {
-        color = colorMapRGB.getColor(
-                format.foreground().color().name().toStdString());
+    if (getForegroundColor().isValid())
+    {
+        color = colorMap.getColor(format.foreground().color().name().toStdString(), true);
         if (color[0] == '#')
             s += "\"" + QString(color.c_str()) + "\" ";
         else
             s += QString(color.c_str()) + " ";
     }
 
-    if (getBackgroundColor().isValid()) {
+    if (getBackgroundColor().isValid())
+    {
         s += "bg:";
-        color = colorMapRGB.getColor(
-                format.background().color().name().toStdString());
+        color = colorMap.getColor(format.background().color().name().toStdString(), true);
         if (color[0] == '#')
             s += "\"" + QString(color.c_str()) + "\" ";
         else

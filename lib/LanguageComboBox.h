@@ -9,7 +9,8 @@
 #include <QComboBox>
 #include "Qt4SyntaxHighlighter.h"
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 /**
   * A subclass of QComboBox which provides functionalities for showing
@@ -17,7 +18,7 @@ namespace srchiliteqt {
   */
 class LanguageComboBox : public QComboBox
 {
-          Q_OBJECT
+    Q_OBJECT
 public:
     /**
      * Initializes the combo box with the .lang files retrieved in the
@@ -32,7 +33,7 @@ public:
      * @deprecated use the other constructor, which permits not needing a Qt4SyntaxHighlighter
      * only for initialization
      */
-    LanguageComboBox(Qt4SyntaxHighlighter *_highlighter);
+    LanguageComboBox(Qt5SyntaxHighlighter *_highlighter);
 
 public slots:
     /**

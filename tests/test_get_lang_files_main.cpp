@@ -17,18 +17,19 @@
 
 #include "asserttestexit.h"
 
-using namespace srchiliteqt;
+using namespace SrcHighlightQt;
 using namespace srchilite;
 using namespace std;
 
-int main() {
+int main()
+{
     cout << "test_get_lang_files..." << endl;
 
     GNUSyntaxHighlighter syntaxHighlighter;
 
     // we must be able to find this lang def file
     HighlightStatePtr highlightState = syntaxHighlighter.getHighlightState(
-            "java.lang");
+                                           "java.lang");
 
     assertTrue(highlightState.get() != 0);
 
@@ -37,10 +38,13 @@ int main() {
     assertTrue(highlightState.get() != 0);
 
     // while this is non existent
-    try {
+    try
+    {
         highlightState = syntaxHighlighter.getHighlightState("foobar.lang");
         assertFalse(true, "must not find foobar.lang");
-    } catch (srchilite::ParserException &e) {
+    }
+    catch (srchilite::ParserException &e)
+    {
         cout << "expected exception: " << e << endl;
     }
 
@@ -51,10 +55,13 @@ int main() {
     assertTrue(highlightState.get() != 0);
 
     // while this is non existent
-    try {
+    try
+    {
         syntaxHighlighter.initHighlighter("fooperl.lang");
         assertFalse(true, "must not find foobar.lang");
-    } catch (srchilite::ParserException &e) {
+    }
+    catch (srchilite::ParserException &e)
+    {
         cout << "expected exception: " << e << endl;
     }
 

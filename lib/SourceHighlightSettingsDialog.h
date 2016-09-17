@@ -8,11 +8,13 @@
 
 #include <QDialog>
 
-namespace Ui {
-    class SourceHighlightSettingsDialog;
+namespace Ui
+{
+class SourceHighlightSettingsDialog;
 }
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 /**
  * A dialog for source-highlight's specific settings (for instance,
@@ -23,7 +25,8 @@ namespace srchiliteqt {
  *
  * @since 0.2
  */
-class SourceHighlightSettingsDialog : public QDialog {
+class SourceHighlightSettingsDialog : public QDialog
+{
     Q_OBJECT
 public:
     SourceHighlightSettingsDialog(QWidget *parent = 0);

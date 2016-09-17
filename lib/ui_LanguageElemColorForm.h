@@ -108,8 +108,9 @@ public:
 
 };
 
-namespace Ui {
-    class LanguageElemColorForm: public Ui_LanguageElemColorForm {};
+namespace Ui
+{
+class LanguageElemColorForm: public Ui_LanguageElemColorForm {};
 } // namespace Ui
 
 QT_END_NAMESPACE

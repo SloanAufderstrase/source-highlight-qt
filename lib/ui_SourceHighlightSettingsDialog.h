@@ -25,7 +25,7 @@ class Ui_SourceHighlightSettingsDialog
 {
 public:
     QGridLayout *gridLayout;
-    srchiliteqt::SourceHighlightSettingsPage *sourceHighlightSettingsPage;
+    SrcHighlightQt::SourceHighlightSettingsPage *sourceHighlightSettingsPage;
     QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *SourceHighlightSettingsDialog)
@@ -35,7 +35,7 @@ public:
         SourceHighlightSettingsDialog->resize(400, 300);
         gridLayout = new QGridLayout(SourceHighlightSettingsDialog);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        sourceHighlightSettingsPage = new srchiliteqt::SourceHighlightSettingsPage(SourceHighlightSettingsDialog);
+        sourceHighlightSettingsPage = new SrcHighlightQt::SourceHighlightSettingsPage(SourceHighlightSettingsDialog);
         sourceHighlightSettingsPage->setObjectName(QStringLiteral("sourceHighlightSettingsPage"));
 
         gridLayout->addWidget(sourceHighlightSettingsPage, 0, 0, 1, 1);
@@ -62,8 +62,9 @@ public:
 
 };
 
-namespace Ui {
-    class SourceHighlightSettingsDialog: public Ui_SourceHighlightSettingsDialog {};
+namespace Ui
+{
+class SourceHighlightSettingsDialog: public Ui_SourceHighlightSettingsDialog {};
 } // namespace Ui
 
 QT_END_NAMESPACE

@@ -9,7 +9,8 @@
 #include <QComboBox>
 #include "Qt4SyntaxHighlighter.h"
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 /**
   * A subclass of QComboBox which provides functionalities for showing
@@ -19,14 +20,14 @@ namespace srchiliteqt {
   */
 class OutputFormatComboBox : public QComboBox
 {
-          Q_OBJECT
+    Q_OBJECT
 public:
-     /**
-       * Initializes the combo box with the .outlang files retrieved in the
-       * specified path.
-       * @param path where to look for .outlang files (if empty, uses the data dir
-       * path of source-highlight)
-       */
+    /**
+      * Initializes the combo box with the .outlang files retrieved in the
+      * specified path.
+      * @param path where to look for .outlang files (if empty, uses the data dir
+      * path of source-highlight)
+      */
     OutputFormatComboBox(const QString &path = "");
 
     /**
@@ -34,7 +35,7 @@ public:
      * @deprecated use the other constructor, which permits not needing a Qt4SyntaxHighlighter
      * only for initialization
      */
-    OutputFormatComboBox(srchiliteqt::Qt4SyntaxHighlighter *_highlighter);
+    OutputFormatComboBox(SrcHighlightQt::Qt5SyntaxHighlighter *_highlighter);
 
 public slots:
     /**

@@ -104,8 +104,9 @@ public:
 
 };
 
-namespace Ui {
-    class MainColorForm: public Ui_MainColorForm {};
+namespace Ui
+{
+class MainColorForm: public Ui_MainColorForm {};
 } // namespace Ui
 
 QT_END_NAMESPACE

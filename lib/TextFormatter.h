@@ -15,7 +15,8 @@
 class FormatterParams;
 class QSyntaxHighlighter;
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 /**
  * A specialization of srchilite::Formatter in order to format parts of
@@ -27,7 +28,8 @@ namespace srchiliteqt {
  * of this class will include the correct header file for QSyntaxHighlighter).
  *
  */
-class TextFormatter: public srchilite::Formatter {
+class TextFormatter: public srchilite::Formatter
+{
 protected:
     /// the language element represented by this formatter
     std::string elem;
@@ -39,8 +41,14 @@ public:
     /**
      * @return the language element represented by this formatter
      */
-    const std::string &getElem() const { return elem; }
-    void setElem(const std::string &e) { elem = e; }
+    const std::string &getElem() const
+    {
+        return elem;
+    }
+    void setElem(const std::string &e)
+    {
+        elem = e;
+    }
 
     virtual void setQSyntaxHighlighter(QSyntaxHighlighter *qSyntaxHighlighter_) = 0;
 };

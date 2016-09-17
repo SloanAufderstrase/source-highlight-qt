@@ -17,17 +17,19 @@
 #define BASEDIR "/usr/share/source-highlight/"
 #endif
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
     QApplication app(argc, argv);
 
     QTextEdit *editor = new QTextEdit;
-    srchiliteqt::Qt4SyntaxHighlighter *highlighter =
-            new srchiliteqt::Qt4SyntaxHighlighter(0);
+    SrcHighlightQt::Qt5SyntaxHighlighter *highlighter =
+        new SrcHighlightQt::Qt5SyntaxHighlighter(0);
 
 
     if (argc > 1)
         highlighter->init(argv[1]);
-    else {
+    else
+    {
         std::cout << "using " << BASEDIR "cpp.lang" << std::endl;
         highlighter->init(BASEDIR "cpp.lang");
     }
@@ -38,8 +40,8 @@ int main(int argc, char **argv) {
     win.setCentralWidget(editor);
 
     win.setWindowTitle(QString("GNU Syntax Highlighter (using ") +
-            QString("Test") + 
-		       QString(")"));
+                       QString("Test") +
+                       QString(")"));
     win.resize(700, 512);
     win.show();
 

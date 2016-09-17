@@ -6,32 +6,37 @@
 #include "StyleComboBox.h"
 #include <srchilite/sourcehighlightutils.h>
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 StyleComboBox::StyleComboBox(QWidget * parent, const QString &path)
-: QComboBox(parent)
+    : QComboBox(parent)
 {
-	setToolTip(tr("choose the style for highlighting."));
-	reload(path);
+    setToolTip(tr("choose the style for highlighting."));
+    reload(path);
 }
 
-StyleComboBox::StyleComboBox(const QString &path) {
+StyleComboBox::StyleComboBox(const QString &path)
+{
     setToolTip(tr("choose the style for highlighting."));
 
     reload(path);
 }
 
-void StyleComboBox::setCurrentStyle(const QString &styleFile) {
+void StyleComboBox::setCurrentStyle(const QString &styleFile)
+{
     int item = findText(styleFile);
     if (item != -1)
         setCurrentIndex(item);
 }
 
-const QString StyleComboBox::getCurrentStyle() const {
+const QString StyleComboBox::getCurrentStyle() const
+{
     return currentText();
 }
 
-void StyleComboBox::reload(const QString &path) {
+void StyleComboBox::reload(const QString &path)
+{
     const QString &currentItem = getCurrentStyle();
 
     // make sure we block signals when we reload the contents
@@ -41,9 +46,10 @@ void StyleComboBox::reload(const QString &path) {
     clear();
 
     srchilite::StringSet styleFiles =
-            srchilite::SourceHighlightUtils::getStyleFileNames(path.toStdString());
+        srchilite::SourceHighlightUtils::getStyleFileNames(path.toStdString());
     for (srchilite::StringSet::const_iterator it = styleFiles.begin(); it
-            != styleFiles.end(); ++it) {
+            != styleFiles.end(); ++it)
+    {
         addItem(QString((*it).c_str()));
     }
 
@@ -52,7 +58,8 @@ void StyleComboBox::reload(const QString &path) {
 
     styleFiles = srchilite::SourceHighlightUtils::getCssStyleFileNames(path.toStdString());
     for (srchilite::StringSet::const_iterator it = styleFiles.begin(); it
-            != styleFiles.end(); ++it) {
+            != styleFiles.end(); ++it)
+    {
         addItem(QString((*it).c_str()));
     }
 

@@ -5,32 +5,41 @@
 
 #include "TextFormatterFactory.h"
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 QtColorMap TextFormatterFactory::colorMap;
 
 TextFormatterFactory::TextFormatterFactory() :
-    defaultToMonospace(true) {
+    defaultToMonospace(true)
+{
 }
 
-TextFormatterFactory::~TextFormatterFactory() {
+TextFormatterFactory::~TextFormatterFactory()
+{
 }
 
-bool TextFormatterFactory::hasFormatter(const string &key) const {
+bool TextFormatterFactory::hasFormatter(const string &key) const
+{
     return textFormatterMap.find(key) != textFormatterMap.end();
 }
 
-TextFormatterPtr TextFormatterFactory::getFormatter(const string &key) const {
+TextFormatterPtr TextFormatterFactory::getFormatter(const string &key) const
+{
     TextFormatterMap::const_iterator it = textFormatterMap.find(key);
-    if (it != textFormatterMap.end()) {
+    if (it != textFormatterMap.end())
+    {
         return it->second;
-    } else {
+    }
+    else
+    {
         return TextFormatterPtr();
     }
 }
 
 void TextFormatterFactory::addFormatter(const string &key,
-        TextFormatterPtr formatter) {
+                                        TextFormatterPtr formatter)
+{
     textFormatterMap[key] = formatter;
 }
 

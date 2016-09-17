@@ -10,7 +10,8 @@
 
 #include "Qt4SyntaxHighlighter.h"
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 class LanguageComboBox;
 class StyleComboBox;
@@ -30,7 +31,7 @@ class TextEditHighlighted : public QTextEdit
 
 private:
     /// the highlighter object
-    srchiliteqt::Qt4SyntaxHighlighter *highlighter;
+    SrcHighlightQt::Qt5SyntaxHighlighter *highlighter;
 
     /// the (possible) LanguageComboBox for selecting languages
     LanguageComboBox *languageComboBox;
@@ -59,7 +60,8 @@ public:
       */
     void connectStyleComboBox(StyleComboBox *lcb);
 
-    srchiliteqt::Qt4SyntaxHighlighter *getHighlighter() const {
+    SrcHighlightQt::Qt5SyntaxHighlighter *getHighlighter() const
+    {
         return highlighter;
     }
 
@@ -87,49 +89,49 @@ public:
     void changeColors(const QString &fgColor, const QString &bgColor);
 
 public slots:
-      /**
-        * Changes the highlighting according to the new specified language
-        * @param newLang the new language definition
-        */
-     void changeHighlightingLanguage(const QString &newLang);
-
-      /**
-        * Changes the highlighting style according to the new specified style file
-        * @param newStyle the new style
-        */
-     void changeHighlightingStyle(const QString &newStyle);
-
-     /**
-       * If the file name changes, then we check whether we need to change
-       * the language definition for highlighting
-       * @param fileName the new file name
-       */
-     void changeFileName(const QString &fileName);
-
-     /**
-      * Returns the the lang def file name by using the file name for detecting
-      * the syntax of the file (e.g., <em>foo.cpp</em> brings to <em>cpp.lang</em>,
-      * <em>ChangeLog</em> brings to <em>changelog.lang</em>).
-      * This method already catches possible exceptions thrown from the source-highlight
-      * library and show them in a message box.
-      *
-      * @param filename
-      * @return the lang def file name or the empty string if no mapping exists
+    /**
+      * Changes the highlighting according to the new specified language
+      * @param newLang the new language definition
       */
-     const QString getLangDefFileFromFileName(const QString &filename);
+    void changeHighlightingLanguage(const QString &newLang);
+
+    /**
+      * Changes the highlighting style according to the new specified style file
+      * @param newStyle the new style
+      */
+    void changeHighlightingStyle(const QString &newStyle);
+
+    /**
+      * If the file name changes, then we check whether we need to change
+      * the language definition for highlighting
+      * @param fileName the new file name
+      */
+    void changeFileName(const QString &fileName);
+
+    /**
+     * Returns the the lang def file name by using the file name for detecting
+     * the syntax of the file (e.g., <em>foo.cpp</em> brings to <em>cpp.lang</em>,
+     * <em>ChangeLog</em> brings to <em>changelog.lang</em>).
+     * This method already catches possible exceptions thrown from the source-highlight
+     * library and show them in a message box.
+     *
+     * @param filename
+     * @return the lang def file name or the empty string if no mapping exists
+     */
+    const QString getLangDefFileFromFileName(const QString &filename);
 
 signals:
-      /**
-        * This signal is emitted when the highlighting language definition changed
-        * @param newLang the new language definition
-        */
-     void changedHighlightingLanguage(const QString &newLang);
+    /**
+      * This signal is emitted when the highlighting language definition changed
+      * @param newLang the new language definition
+      */
+    void changedHighlightingLanguage(const QString &newLang);
 
-     /**
-        * This signal is emitted when the highlighting style changed
-        * @param newLang the new language definition
-        */
-     void changedHighlightingStyle(const QString &newLang);
+    /**
+       * This signal is emitted when the highlighting style changed
+       * @param newLang the new language definition
+       */
+    void changedHighlightingStyle(const QString &newLang);
 
 };
 

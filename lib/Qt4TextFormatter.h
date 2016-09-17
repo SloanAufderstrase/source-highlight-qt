@@ -10,15 +10,21 @@
 #include <QSyntaxHighlighter>
 
 #include "TextFormatter.h"
+#include "QtColorMap.h"
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
-class Qt4SyntaxHighlighter;
+class Qt5SyntaxHighlighter;
 
 /**
  * The implementation of TextFormatter for Qt4, relying on QTextCharFormat
  */
-class Qt4TextFormatter: public TextFormatter {
+class Qt5TextFormatter: public TextFormatter
+{
+private:
+    QtColorMap colorMap;
+
 protected:
     /**
      * The format represented by this formatter.
@@ -40,13 +46,14 @@ protected:
      * then this same class can be re-used both for Qt3 and for Qt4 (the subclasses
      * of this class will include the correct header file for QSyntaxHighlighter).
      */
-    Qt4SyntaxHighlighter *qSyntaxHighlighter;
+    Qt5SyntaxHighlighter *qSyntaxHighlighter;
 
 public:
-    Qt4TextFormatter(const std::string &elem_ = "normal");
-    virtual ~Qt4TextFormatter();
+    Qt5TextFormatter(const std::string &elem_ = "normal");
+    virtual ~Qt5TextFormatter();
 
-    const QTextCharFormat &getQTextCharFormat() const {
+    const QTextCharFormat &getQTextCharFormat() const
+    {
         return textFormat;
     }
 
@@ -74,48 +81,58 @@ public:
      */
     const QString toSourceHighlightStyleString() const;
 
-    bool isBold() const {
+    bool isBold() const
+    {
         return textFormat.fontWeight() == QFont::Bold;
     }
 
-    void setBold(bool b) {
+    void setBold(bool b)
+    {
         textFormat.setFontWeight(b ? QFont::Bold : QFont::Normal);
     }
 
-    bool isItalic() const {
+    bool isItalic() const
+    {
         return textFormat.fontItalic();
     }
 
-    void setItalic(bool i) {
+    void setItalic(bool i)
+    {
         textFormat.setFontItalic(i);
     }
 
-    bool isUnderline() const {
+    bool isUnderline() const
+    {
         return textFormat.fontUnderline();
     }
 
-    void setUnderline(bool u) {
+    void setUnderline(bool u)
+    {
         textFormat.setFontUnderline(u);
     }
 
-    bool isMonospace() const {
+    bool isMonospace() const
+    {
         return textFormat.fontFamily() == "Monospace";
     }
 
-    void setMonospace(bool m) {
+    void setMonospace(bool m)
+    {
         if (m)
             textFormat.setFontFamily("Monospace");
     }
 
     /// @return the (possibly invalid, if not set) foreground color
-    const QColor &getForegroundColor() const {
+    const QColor &getForegroundColor() const
+    {
         return foregroundColor;
     }
 
     void setForegroundColor(const QColor &color);
 
     /// @return the (possibly invalid, if not set) background color
-    const QColor &getBackgroundColor() const {
+    const QColor &getBackgroundColor() const
+    {
         return backgroundColor;
     }
 

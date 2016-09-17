@@ -114,10 +114,10 @@ public:
         label->setText(QApplication::translate("SourceHighlightSettingsPage", "Source-highlight's files path", 0));
 #ifndef QT_NO_TOOLTIP
         sourceHighlightDataDirLineEdit->setToolTip(QApplication::translate("SourceHighlightSettingsPage", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Sets the path where source-highlight searches for all its configuration files (e.g., .lang, .outlang, etc.); this basically corresponds to source-highlight's <span style=\" font-weight:600;\">--data-dir</span> command line option.</p></body></html>", 0));
+                "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                "p, li { white-space: pre-wrap; }\n"
+                "</style></head><body style=\" font-family:'Sans'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+                "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Sets the path where source-highlight searches for all its configuration files (e.g., .lang, .outlang, etc.); this basically corresponds to source-highlight's <span style=\" font-weight:600;\">--data-dir</span> command line option.</p></body></html>", 0));
 #endif // QT_NO_TOOLTIP
         browseButton->setText(QApplication::translate("SourceHighlightSettingsPage", "Browse...", 0));
 #ifndef QT_NO_TOOLTIP
@@ -125,21 +125,22 @@ public:
 #endif // QT_NO_TOOLTIP
         defaultButton->setText(QApplication::translate("SourceHighlightSettingsPage", "Default", 0));
         errorLabel->setText(QApplication::translate("SourceHighlightSettingsPage", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; color:#ff0000;\">The path is not a valid source-highlight's path</span></p></body></html>", 0));
+                            "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                            "p, li { white-space: pre-wrap; }\n"
+                            "</style></head><body style=\" font-family:'Sans'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+                            "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; color:#ff0000;\">The path is not a valid source-highlight's path</span></p></body></html>", 0));
         okLabel->setText(QApplication::translate("SourceHighlightSettingsPage", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Sans'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#00aa00;\">Valid source-highlight path</span></p></body></html>", 0));
+                         "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                         "p, li { white-space: pre-wrap; }\n"
+                         "</style></head><body style=\" font-family:'Sans'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+                         "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#00aa00;\">Valid source-highlight path</span></p></body></html>", 0));
     } // retranslateUi
 
 };
 
-namespace Ui {
-    class SourceHighlightSettingsPage: public Ui_SourceHighlightSettingsPage {};
+namespace Ui
+{
+class SourceHighlightSettingsPage: public Ui_SourceHighlightSettingsPage {};
 } // namespace Ui
 
 QT_END_NAMESPACE

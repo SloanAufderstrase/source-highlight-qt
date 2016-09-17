@@ -11,32 +11,39 @@
 
 using namespace srchilite;
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
-Qt4TextFormatterFactory::Qt4TextFormatterFactory() {
+Qt5TextFormatterFactory::Qt5TextFormatterFactory()
+{
 }
 
-Qt4TextFormatterFactory::~Qt4TextFormatterFactory() {
+Qt5TextFormatterFactory::~Qt5TextFormatterFactory()
+{
 }
 
-bool Qt4TextFormatterFactory::createFormatter(const string &key,
+bool Qt5TextFormatterFactory::createFormatter(const string &key,
         const string &color, const string &bgcolor,
-        srchilite::StyleConstantsPtr styleconstants) {
+        srchilite::StyleConstantsPtr styleconstants)
+{
 
     if (hasFormatter(key))
         return false;
 
-    Qt4TextFormatter *formatter = new Qt4TextFormatter(key);
+    Qt5TextFormatter *formatter = new Qt5TextFormatter(key);
     addFormatter(key, TextFormatterPtr(formatter));
 
     // check whether we should default to monospace
     if (isDefaultToMonospace())
         formatter->setMonospace(true);
 
-    if (styleconstants.get()) {
+    if (styleconstants.get())
+    {
         for (StyleConstantsIterator it = styleconstants->begin(); it
-                != styleconstants->end(); ++it) {
-            switch (*it) {
+                != styleconstants->end(); ++it)
+        {
+            switch (*it)
+            {
             case ISBOLD:
                 formatter->setBold(true);
                 break;
@@ -59,11 +66,13 @@ bool Qt4TextFormatterFactory::createFormatter(const string &key,
         }
     }
 
-    if (color.size()) {
+    if (color.size())
+    {
         formatter->setForegroundColor(colorMap.getColor(color).c_str());
     }
 
-    if (bgcolor.size()) {
+    if (bgcolor.size())
+    {
         formatter->setBackgroundColor(colorMap.getColor(bgcolor).c_str());
     }
 

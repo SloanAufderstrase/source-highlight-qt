@@ -12,11 +12,13 @@
 #include "MainColorForm.h"
 #include "Qt4SyntaxHighlighter.h"
 
-namespace Ui {
-    class ColorDialog;
+namespace Ui
+{
+class ColorDialog;
 }
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 class LanguageElemColorForm;
 
@@ -41,17 +43,18 @@ class LanguageElemColorForm;
     }
   * @endcode
   */
-class ColorDialog : public QDialog {
+class ColorDialog : public QDialog
+{
     Q_OBJECT
     Q_DISABLE_COPY(ColorDialog)
 
     /// the highlighter object
-    srchiliteqt::Qt4SyntaxHighlighter *highlighter;
+    SrcHighlightQt::Qt5SyntaxHighlighter *highlighter;
 public:
     /**
       * @param the associated Qt4SyntaxHighlighter
       */
-    explicit ColorDialog(srchiliteqt::Qt4SyntaxHighlighter *highlighter_, QWidget *parent = 0);
+    explicit ColorDialog(SrcHighlightQt::Qt5SyntaxHighlighter *highlighter_, QWidget *parent = 0);
     virtual ~ColorDialog();
 
     /**

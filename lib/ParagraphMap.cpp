@@ -7,41 +7,53 @@
 
 using namespace std;
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
-ParagraphMap::ParagraphMap() : dataVector(vectorType(STARTING_SIZE)) {
+ParagraphMap::ParagraphMap() : dataVector(vectorType(STARTING_SIZE))
+{
     // let's create some (empty) elements, 100 should be enough to start
     const vectorType::size_type s = 100;
     dataVector.resize(s);
     for (vectorType::iterator it = dataVector.begin(); it
-            != dataVector.end(); ++it) {
+            != dataVector.end(); ++it)
+    {
         *it = 0;
     }
 }
 
-ParagraphMap::~ParagraphMap() {
+ParagraphMap::~ParagraphMap()
+{
     for (vectorType::const_iterator it = dataVector.begin(); it
-            != dataVector.end(); ++it) {
-        if (*it) {
+            != dataVector.end(); ++it)
+    {
+        if (*it)
+        {
             delete *it;
         }
     }
 }
 
-void ParagraphMap::insert(int pos, HighlightStateData *data) {
-    if (pos < (int)dataVector.size()) {
-        if (dataVector[pos]) {
+void ParagraphMap::insert(int pos, HighlightStateData *data)
+{
+    if (pos < (int)dataVector.size())
+    {
+        if (dataVector[pos])
+        {
             // first remove possible previous data
             delete dataVector[pos];
         }
         dataVector[pos] = data;
-    } else {
+    }
+    else
+    {
         //add it to the end (and automatically extend the size)
         dataVector.push_back(data);
     }
 }
 
-HighlightStateData *ParagraphMap::getData(int pos) {
+HighlightStateData *ParagraphMap::getData(int pos)
+{
     return dataVector[pos];
 }
 

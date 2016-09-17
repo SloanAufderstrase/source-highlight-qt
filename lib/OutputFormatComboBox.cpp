@@ -7,35 +7,41 @@
 
 #include <srchilite/sourcehighlightutils.h>
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
-OutputFormatComboBox::OutputFormatComboBox(const QString &path) {
+OutputFormatComboBox::OutputFormatComboBox(const QString &path)
+{
     setToolTip(tr("choose the output format for highlighting."));
 
     reload(path);
 }
 
-OutputFormatComboBox::OutputFormatComboBox(srchiliteqt::Qt4SyntaxHighlighter *highlighter)
+OutputFormatComboBox::OutputFormatComboBox(SrcHighlightQt::Qt5SyntaxHighlighter *highlighter)
 {
     setToolTip(tr("choose the output format for highlighting."));
 
     std::set<std::string> langfiles = highlighter->getOutLangMap()->getMappedFileNames();
-    for (std::set<std::string>::const_iterator it = langfiles.begin(); it != langfiles.end(); ++it) {
+    for (std::set<std::string>::const_iterator it = langfiles.begin(); it != langfiles.end(); ++it)
+    {
         addItem(QString((*it).c_str()));
     }
 }
 
-void OutputFormatComboBox::setCurrentOutputFormat(const QString &outlang) {
+void OutputFormatComboBox::setCurrentOutputFormat(const QString &outlang)
+{
     int item = findText(outlang);
     if (item != -1)
         setCurrentIndex(item);
 }
 
-const QString OutputFormatComboBox::getCurrentOutputFormat() const {
+const QString OutputFormatComboBox::getCurrentOutputFormat() const
+{
     return currentText();
 }
 
-void OutputFormatComboBox::reload(const QString &path) {
+void OutputFormatComboBox::reload(const QString &path)
+{
     const QString &currentItem = getCurrentOutputFormat();
 
     // make sure we block signals when we reload the contents
@@ -45,9 +51,10 @@ void OutputFormatComboBox::reload(const QString &path) {
     clear();
 
     srchilite::StringSet files =
-            srchilite::SourceHighlightUtils::getOutLangFileNames(path.toStdString());
+        srchilite::SourceHighlightUtils::getOutLangFileNames(path.toStdString());
     for (srchilite::StringSet::const_iterator it = files.begin(); it
-            != files.end(); ++it) {
+            != files.end(); ++it)
+    {
         addItem(QString((*it).c_str()));
     }
 

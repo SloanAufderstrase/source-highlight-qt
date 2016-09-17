@@ -8,17 +8,20 @@
 
 #include <QtWidgets>
 
-namespace Ui {
-    class LanguageElemColorForm;
+namespace Ui
+{
+class LanguageElemColorForm;
 }
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 /**
   * A form that can be used to select the style of a language
   * element to highlight (for instance, color, bold, italic, etc.).
   */
-class LanguageElemColorForm : public QWidget {
+class LanguageElemColorForm : public QWidget
+{
     Q_OBJECT
     Q_DISABLE_COPY(LanguageElemColorForm)
 public:
@@ -46,14 +49,16 @@ public:
     /**
       * @return the color of the foreground
       */
-    const QColor &getColor() const {
+    const QColor &getColor() const
+    {
         return foreground;
     }
 
     /**
       * @return the color of the background
       */
-    const QColor &getBackgroundColor() const {
+    const QColor &getBackgroundColor() const
+    {
         return background;
     }
 

@@ -6,7 +6,8 @@
 #include "SourceHighlightSettingsDialog.h"
 #include "ui_SourceHighlightSettingsDialog.h"
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 SourceHighlightSettingsDialog::SourceHighlightSettingsDialog(QWidget *parent) :
     QDialog(parent),
@@ -20,18 +21,21 @@ SourceHighlightSettingsDialog::~SourceHighlightSettingsDialog()
     delete ui;
 }
 
-void SourceHighlightSettingsDialog::setSourceHighlightDataDirPath(const QString &path) {
+void SourceHighlightSettingsDialog::setSourceHighlightDataDirPath(const QString &path)
+{
     ui->sourceHighlightSettingsPage->setSourceHighlightDataDirPath(path);
 }
 
-const QString SourceHighlightSettingsDialog::getSourceHighlightDataDirPath() const {
+const QString SourceHighlightSettingsDialog::getSourceHighlightDataDirPath() const
+{
     return ui->sourceHighlightSettingsPage->getSourceHighlightDataDirPath();
 }
 
 void SourceHighlightSettingsDialog::changeEvent(QEvent *e)
 {
     QDialog::changeEvent(e);
-    switch (e->type()) {
+    switch (e->type())
+    {
     case QEvent::LanguageChange:
         ui->retranslateUi(this);
         break;

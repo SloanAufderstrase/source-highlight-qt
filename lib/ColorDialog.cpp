@@ -9,9 +9,10 @@
 #include "LanguageElemColorForm.h"
 #include "Qt4TextFormatter.h"
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
-ColorDialog::ColorDialog(srchiliteqt::Qt4SyntaxHighlighter *highlighter_, QWidget *parent) :
+ColorDialog::ColorDialog(SrcHighlightQt::Qt5SyntaxHighlighter *highlighter_, QWidget *parent) :
     QDialog(parent), highlighter(highlighter_),
     m_ui(new Ui::ColorDialog)
 {
@@ -25,22 +26,23 @@ ColorDialog::ColorDialog(srchiliteqt::Qt4SyntaxHighlighter *highlighter_, QWidge
 
     // now query the highlighter for all the text formatters, to fill
     // the color dialog
-    srchiliteqt::Qt4TextFormatterMap formatterMap = highlighter->getQt4TextFormatterMap();
-    srchiliteqt::Qt4TextFormatterMapIterator i(formatterMap);
-    while (i.hasNext()) {
-         i.next();
-         LanguageElemColorForm *colorForm = new LanguageElemColorForm();
-         colorForm->setColorDescription(i.key());
-         colorForm->setColor(i.value()->getForegroundColor());
-         colorForm->setBackgroundColor(i.value()->getBackgroundColor());
-         colorForm->setBold(i.value()->isBold());
-         colorForm->setItalic(i.value()->isItalic());
-         colorForm->setUnderline(i.value()->isUnderline());
-         colorForm->setMonospace(i.value()->isMonospace());
+    SrcHighlightQt::Qt5TextFormatterMap formatterMap = highlighter->getQt5TextFormatterMap();
+    SrcHighlightQt::Qt5TextFormatterMapIterator i(formatterMap);
+    while (i.hasNext())
+    {
+        i.next();
+        LanguageElemColorForm *colorForm = new LanguageElemColorForm();
+        colorForm->setColorDescription(i.key());
+        colorForm->setColor(i.value()->getForegroundColor());
+        colorForm->setBackgroundColor(i.value()->getBackgroundColor());
+        colorForm->setBold(i.value()->isBold());
+        colorForm->setItalic(i.value()->isItalic());
+        colorForm->setUnderline(i.value()->isUnderline());
+        colorForm->setMonospace(i.value()->isMonospace());
 
-         addColorForm(colorForm);
+        addColorForm(colorForm);
 
-         colorFormMap[i.key()] = colorForm;
+        colorFormMap[i.key()] = colorForm;
     }
 }
 
@@ -52,7 +54,8 @@ ColorDialog::~ColorDialog()
 void ColorDialog::changeEvent(QEvent *e)
 {
     QDialog::changeEvent(e);
-    switch (e->type()) {
+    switch (e->type())
+    {
     case QEvent::LanguageChange:
         m_ui->retranslateUi(this);
         break;
@@ -61,31 +64,35 @@ void ColorDialog::changeEvent(QEvent *e)
     }
 }
 
-void ColorDialog::addColorForm(QWidget *form) {
+void ColorDialog::addColorForm(QWidget *form)
+{
     form->setParent(m_ui->area);
     m_ui->verticalLayout->addWidget(form);
 }
 
-void ColorDialog::syncFormatters() {
+void ColorDialog::syncFormatters()
+{
     // now query the highlighter for all the text formatters, to update
     // them with the data of the dialog
-    srchiliteqt::Qt4TextFormatterMap formatterMap = highlighter->getQt4TextFormatterMap();
-    srchiliteqt::Qt4TextFormatterMapIterator i(formatterMap);
-    while (i.hasNext()) {
-         i.next();
-         LanguageElemColorForm *colorForm = colorFormMap[i.key()];
-         if (colorForm) {
-             srchiliteqt::Qt4TextFormatter *formatter = i.value();
+    SrcHighlightQt::Qt5TextFormatterMap formatterMap = highlighter->getQt5TextFormatterMap();
+    SrcHighlightQt::Qt5TextFormatterMapIterator i(formatterMap);
+    while (i.hasNext())
+    {
+        i.next();
+        LanguageElemColorForm *colorForm = colorFormMap[i.key()];
+        if (colorForm)
+        {
+            SrcHighlightQt::Qt5TextFormatter *formatter = i.value();
 
-             if (colorForm->getColor().isValid())
+            if (colorForm->getColor().isValid())
                 formatter->setForegroundColor(colorForm->getColor());
-             if (colorForm->getBackgroundColor().isValid())
+            if (colorForm->getBackgroundColor().isValid())
                 formatter->setBackgroundColor(colorForm->getBackgroundColor());
-             formatter->setBold(colorForm->isBold());
-             formatter->setItalic(colorForm->isItalic());
-             formatter->setUnderline(colorForm->isUnderline());
-             formatter->setMonospace(colorForm->isMonospace());
-         }
+            formatter->setBold(colorForm->isBold());
+            formatter->setItalic(colorForm->isItalic());
+            formatter->setUnderline(colorForm->isUnderline());
+            formatter->setMonospace(colorForm->isMonospace());
+        }
     }
 
     // update foreground and background color of the highlighter

@@ -8,7 +8,8 @@
 
 #include <QComboBox>
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 /**
   * A subclass of QComboBox which provides functionalities for showing

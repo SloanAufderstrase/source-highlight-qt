@@ -10,11 +10,13 @@
 
 class QWidget;
 
-namespace srchilite {
-    class ParserException;
+namespace srchilite
+{
+class ParserException;
 }
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 /**
  * Utility functions to show message boxes related to Source-Highlight
@@ -22,7 +24,8 @@ namespace srchiliteqt {
  *
  * @since 0.2
  */
-class SourceHighlightExceptionBox {
+class SourceHighlightExceptionBox
+{
 public:
     /**
      * Shows a message box with the details of the ParserException exception

@@ -8,15 +8,18 @@
 
 #include <QWidget>
 
-namespace Ui {
-    class SourceHighlightSettingsPage;
+namespace Ui
+{
+class SourceHighlightSettingsPage;
 }
 
-namespace srchilite {
-    class Settings;
+namespace srchilite
+{
+class Settings;
 }
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 /**
  * A page for a dialog for source-highlight's specific settings; this
@@ -27,7 +30,8 @@ namespace srchiliteqt {
  *
  * @since 0.2
  */
-class SourceHighlightSettingsPage : public QWidget {
+class SourceHighlightSettingsPage : public QWidget
+{
     Q_OBJECT
 public:
     SourceHighlightSettingsPage(QWidget *parent = 0);

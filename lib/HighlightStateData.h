@@ -8,19 +8,22 @@
 
 #include <srchilite/sourcehighlighter.h>
 
-namespace srchiliteqt {
+namespace SrcHighlightQt
+{
 
 /**
  * Utility class to deal with current highlighting state (and stack of states)
  */
-struct HighlightStateData {
+struct HighlightStateData
+{
     /// the current state for the SourceHighlighter object
     srchilite::HighlightStatePtr currentState;
 
     /// the current stack for the SourceHighlighter object
     srchilite::HighlightStateStackPtr stateStack;
 
-    HighlightStateData() {
+    HighlightStateData()
+    {
     }
 
     /**
@@ -28,23 +31,26 @@ struct HighlightStateData {
      * @param data
      */
     HighlightStateData(const HighlightStateData& data) :
-                currentState(data.currentState),
-                stateStack(srchilite::HighlightStateStackPtr(
-                        new srchilite::HighlightStateStack(*(data.stateStack)))) {
+        currentState(data.currentState),
+        stateStack(srchilite::HighlightStateStackPtr(
+                       new srchilite::HighlightStateStack(*(data.stateStack))))
+    {
     }
 
     HighlightStateData(srchilite::HighlightStatePtr currentState_,
-            srchilite::HighlightStateStackPtr stateStack_) :
-        currentState(currentState_), stateStack(stateStack_) {
+                       srchilite::HighlightStateStackPtr stateStack_) :
+        currentState(currentState_), stateStack(stateStack_)
+    {
     }
 
     /**
      * Performs a deep copy of the passed object (by duplicating the stack)
      */
-    void copyFrom(const HighlightStateData& data) {
+    void copyFrom(const HighlightStateData& data)
+    {
         currentState = data.currentState;
         stateStack = srchilite::HighlightStateStackPtr(
-                new srchilite::HighlightStateStack(*(data.stateStack)));
+                         new srchilite::HighlightStateStack(*(data.stateStack)));
     }
 };
 
