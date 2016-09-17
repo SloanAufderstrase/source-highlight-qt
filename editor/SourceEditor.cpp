@@ -4,6 +4,7 @@
 #include "SourceEditor.h"
 #include "LineNumberArea.h"
 
+#define DEBUG
 #ifdef DEBUG
 #include <QDebug>
 #define WARN(x) qDebug()<<x;
@@ -78,11 +79,11 @@ void SourceEditor::highlightCurrentLine()
 
     if(!isReadOnly()) {
         QTextEdit::ExtraSelection selection;
-
         selection.format.setBackground(m_colorCurrentLine);
         selection.format.setProperty(QTextFormat::FullWidthSelection, true);
         selection.cursor = textCursor();
-        selection.cursor.clearSelection();
+        selection.cursor.movePosition(QTextCursor::StartOfBlock);
+        selection.cursor.movePosition(QTextCursor::NextBlock, QTextCursor::KeepAnchor);
         extraSelections.append(selection);
     }
 
@@ -97,14 +98,12 @@ void SourceEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
     int blockNumber = block.blockNumber();
     int top = (int) blockBoundingGeometry(block).translated(contentOffset()).top();
     int bottom = top + (int) blockBoundingRect(block).height();
-
     while (block.isValid()  && top <= event->rect().bottom()) {
         if (block.isVisible() && bottom >= event->rect().top()) {
             QString number = QString::number(blockNumber + 1);
             painter.setPen(m_colorLineNumberAreaForeground);
-            painter.drawText(0, top, m_lineNumberArea->width(), fontMetrics().height(), Qt::AlignRight, number);
+            painter.drawText(0, top, m_lineNumberArea->width(), fontMetrics().height() * block.lineCount(), Qt::AlignRight, number);
         }
-
         block = block.next();
         top = bottom;
         bottom = top + (int) blockBoundingRect(block).height();
@@ -137,3 +136,8 @@ void SourceEditor::setColorLineNumberArea(const QString &fg, const QString &bg)
     setColor(fg, m_colorLineNumberAreaForeground);
     setColor(bg, m_colorLineNumberAreaBackground);
 }
+
+//void SourceEditor::setLineNumberAreaPadding(int left, int right)
+//{
+    
+//}
