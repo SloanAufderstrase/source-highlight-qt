@@ -11,14 +11,13 @@
  */
 
 #include <Qt4SyntaxHighlighter.h>
-
 #include <QtGui>
 #include <QApplication>
 #include <QMainWindow>
 #include <QTextEdit>
 #include <QTextStream>
 #include <QFile>
-
+#include <SourceEditor.h>
 #include <iostream>
 
 // TEXINFOINCLUDE
@@ -32,7 +31,7 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    QTextEdit *editor = new QTextEdit;
+    SourceEditor *editor = new SourceEditor;
     SrcHighlightQt::Qt5SyntaxHighlighter *highlighter =
         new SrcHighlightQt::Qt5SyntaxHighlighter(editor->document());
 

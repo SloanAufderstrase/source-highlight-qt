@@ -24,6 +24,6 @@ target_link_libraries(test_qt4_syntaxhighlighter_main LINK_PUBLIC srchiliteqt -l
 target_link_libraries(test_colormap_main LINK_PUBLIC srchiliteqt -lsource-highlight Qt5::Widgets Qt5::Core)
 target_link_libraries(test_get_lang_files_main LINK_PUBLIC srchiliteqt -lsource-highlight Qt5::Widgets Qt5::Core)
 target_link_libraries(qt4_highlighter_view_main LINK_PUBLIC srchiliteqt -lsource-highlight Qt5::Widgets Qt5::Core)
-target_link_libraries(qt4_highlighter_edit_main LINK_PUBLIC srchiliteqt -lsource-highlight Qt5::Widgets Qt5::Core)
+target_link_libraries(qt4_highlighter_edit_main LINK_PUBLIC -lsourceeditor srchiliteqt -lsource-highlight Qt5::Widgets Qt5::Core)
 target_link_libraries(qt4_highlighter_example_main LINK_PUBLIC srchiliteqt -lsource-highlight Qt5::Widgets Qt5::Core)
 target_link_libraries(test_qt4_formatter_factory_main LINK_PUBLIC srchiliteqt -lsource-highlight Qt5::Widgets Qt5::Core)
