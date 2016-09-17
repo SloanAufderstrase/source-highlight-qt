@@ -4,6 +4,13 @@
 #include "SourceEditor.h"
 #include "LineNumberArea.h"
 
+#ifdef DEBUG
+#include <QDebug>
+#define WARN(x) qDebug()<<x;
+#else
+#define WARN(x)
+#endif
+
 SourceEditor::SourceEditor(QWidget *parent) : QPlainTextEdit(parent)
 {
     m_lineNumberArea = new LineNumberArea(this);
@@ -11,6 +18,10 @@ SourceEditor::SourceEditor(QWidget *parent) : QPlainTextEdit(parent)
     connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
     connect(this, SIGNAL(updateRequest(QRect, int)), this, SLOT(updateLineNumberArea(QRect, int)));
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
+
+    m_colorCurrentLine = QColor(Qt::yellow).lighter(160);
+    m_colorLineNumberAreaForeground = QColor(Qt::black);
+    m_colorLineNumberAreaBackground = QColor(Qt::lightGray);
 
     updateLineNumberAreaWidth(0);
     highlightCurrentLine();
@@ -67,9 +78,8 @@ void SourceEditor::highlightCurrentLine()
 
     if(!isReadOnly()) {
         QTextEdit::ExtraSelection selection;
-        QColor lineColor = QColor(Qt::yellow).lighter(160);
 
-        selection.format.setBackground(lineColor);
+        selection.format.setBackground(m_colorCurrentLine);
         selection.format.setProperty(QTextFormat::FullWidthSelection, true);
         selection.cursor = textCursor();
         selection.cursor.clearSelection();
@@ -82,7 +92,7 @@ void SourceEditor::highlightCurrentLine()
 void SourceEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
 {
     QPainter painter(m_lineNumberArea);
-    painter.fillRect(event->rect(), Qt::lightGray);
+    painter.fillRect(event->rect(), m_colorLineNumberAreaBackground);
     QTextBlock block = firstVisibleBlock();
     int blockNumber = block.blockNumber();
     int top = (int) blockBoundingGeometry(block).translated(contentOffset()).top();
@@ -91,7 +101,7 @@ void SourceEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
     while (block.isValid()  && top <= event->rect().bottom()) {
         if (block.isVisible() && bottom >= event->rect().top()) {
             QString number = QString::number(blockNumber + 1);
-            painter.setPen(Qt::black);
+            painter.setPen(m_colorLineNumberAreaForeground);
             painter.drawText(0, top, m_lineNumberArea->width(), fontMetrics().height(), Qt::AlignRight, number);
         }
 
@@ -100,4 +110,30 @@ void SourceEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
         bottom = top + (int) blockBoundingRect(block).height();
         ++blockNumber;
     }
+}
+
+void SourceEditor::setColor(const QString &color, QColor &colorObject)
+{
+    if (color.isEmpty()) {
+        return;
+    }
+
+    QColor newColor;
+    if (color[0] == '#') {
+        newColor.setNamedColor(color);
+    } else {
+        newColor.setNamedColor("#" + color);
+    }
+
+    if (newColor.isValid()) {
+        colorObject = newColor;
+    } else {
+        WARN("Invalid color detected");
+    }
+}
+
+void SourceEditor::setColorLineNumberArea(const QString &fg, const QString &bg)
+{
+    setColor(fg, m_colorLineNumberAreaForeground);
+    setColor(bg, m_colorLineNumberAreaBackground);
 }
