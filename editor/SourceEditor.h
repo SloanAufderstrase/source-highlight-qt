@@ -13,6 +13,7 @@ public:
     int lineNumberAreaWidth();
 
     void setColorLineNumberArea(const QString &, const QString &);
+    void setColorCurrentLineBackground(const QString &);
     void setTabWidth(int);
     bool tabWidth();
     void setSpaceAsTab(bool);
