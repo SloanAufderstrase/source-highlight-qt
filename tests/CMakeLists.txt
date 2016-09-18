@@ -8,6 +8,11 @@ find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_Package(Qt5Core REQUIRED)
 
-add_executable(qt4_highlighter_edit_main qt4_highlighter_edit_main.cpp)
+add_executable(example example.cpp)
 
-target_link_libraries(qt4_highlighter_edit_main LINK_PUBLIC sourceeditor srchiliteqt -lsource-highlight Qt5::Widgets Qt5::Core)
+target_link_libraries(example LINK_PUBLIC 
+    sourceeditor 
+    srchiliteqt 
+    -lsource-highlight 
+    Qt5::Widgets 
+    Qt5::Core)
