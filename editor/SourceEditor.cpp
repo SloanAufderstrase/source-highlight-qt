@@ -23,7 +23,7 @@ SourceEditor::SourceEditor(QWidget *parent) : QPlainTextEdit(parent)
     m_colorCurrentLine = QColor(Qt::yellow).lighter(160);
     m_colorLineNumberAreaForeground = QColor(Qt::black);
     m_colorLineNumberAreaBackground = QColor(Qt::lightGray);
-
+    m_highlighter = new SrcHighlightQt::Qt5SyntaxHighlighter(this->document());
     updateLineNumberAreaWidth(0);
     highlightCurrentLine();
 }
@@ -46,6 +46,16 @@ int SourceEditor::lineNumberAreaWidth()
     int space = 3 + fontMetrics().width(QLatin1Char('9')) * digits;
 
     return space;
+}
+
+void SourceEditor::setLanguage(const QString &lang)
+{
+    m_highlighter->setLanguage(lang);
+}
+
+QStringList SourceEditor::languages()
+{
+    return m_highlighter->languages();
 }
 
 void SourceEditor::updateLineNumberAreaWidth(int newWidth)

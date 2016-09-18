@@ -2,7 +2,7 @@
 #define __SOURCEEDITOR_H__
 
 #include <QPlainTextEdit>
-
+#include <Qt4SyntaxHighlighter.h>
 class SourceEditor : public QPlainTextEdit {
     Q_OBJECT
 public:
@@ -19,6 +19,8 @@ public:
     void setSpaceAsTab(bool);
     bool spaceAsTab();
 
+    void setLanguage(const QString &);
+    QStringList languages();
 protected:
     void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
     void keyPressEvent(QKeyEvent *e) Q_DECL_OVERRIDE;
@@ -30,6 +32,7 @@ private slots:
 
 private:
     QWidget *m_lineNumberArea;
+    SrcHighlightQt::Qt5SyntaxHighlighter *m_highlighter;
     QColor   m_colorCurrentLine;
     QColor   m_colorLineNumberAreaBackground;
     QColor   m_colorLineNumberAreaForeground;

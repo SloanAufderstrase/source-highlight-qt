@@ -187,6 +187,20 @@ bool Qt5SyntaxHighlighter::initFromFileName(const QString &fileName)
     return true;
 }
 
+bool Qt5SyntaxHighlighter::setLanguage(const QString &lang)
+{
+    const QString langDefFile = getMappedFileName(lang);
+    if (langDefFile.isEmpty())
+        return false;
+    init(langDefFile);
+    return true;
+}
+
+const QStringList Qt5SyntaxHighlighter::languages()
+{
+    return getLangNames();
+}
+
 void Qt5SyntaxHighlighter::highlightBlock(const QString &text)
 {
     if (isReadOnly())

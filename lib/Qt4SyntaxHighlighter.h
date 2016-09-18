@@ -17,10 +17,8 @@
 namespace SrcHighlightQt
 {
 
-/// the map of Qt4TextFormatters
 typedef QMap<QString, Qt5TextFormatter *> Qt5TextFormatterMap;
 
-/// the iterator for Qt4TextFormatterMap
 typedef QMapIterator<QString, Qt5TextFormatter *> Qt5TextFormatterMapIterator;
 
 /**
@@ -68,6 +66,9 @@ public:
      * in this case it must be a css file that source-highlight is able to handle)
      * @throws ParserException in case of parsing error of the lang file or of the style file
      */
+    bool setLanguage(const QString &lang);
+    const QStringList languages();
+
     void init(const QString &langFile, const QString &styleFile =
                   "default.style");
 

@@ -32,9 +32,7 @@ int main(int argc, char **argv)
     }
 
     SourceEditor *editor = new SourceEditor;
-    SrcHighlightQt::Qt5SyntaxHighlighter *highlighter =
-        new SrcHighlightQt::Qt5SyntaxHighlighter(editor->document());
-
+    editor->setLanguage("cpp");
     QMainWindow win(0);
     win.setCentralWidget(editor);
 
@@ -43,13 +41,6 @@ int main(int argc, char **argv)
     {
         std::cerr << QString("Cannot read file %1:\n%2.") .arg(argv[1]) .arg(
                       file.errorString()).toStdString() << std::endl;
-        return 1;
-    }
-
-    if (!highlighter->initFromFileName(argv[1]))
-    {
-        std::cerr << "cannot find an highlighting scheme for " << argv[1]
-                  << std::endl;
         return 1;
     }
 

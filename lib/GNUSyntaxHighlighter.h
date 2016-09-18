@@ -65,6 +65,9 @@ public:
         return langFile;
     }
 
+    const QString getMappedFileName(const QString &lang);
+    const QStringList getLangNames();
+
     /**
      * Given a language definition file name, returns the corresponding
      * highlight state.  This method is mainly for testing purposes.

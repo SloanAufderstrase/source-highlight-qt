@@ -69,6 +69,22 @@ void GNUSyntaxHighlighter::initHighlighter(const QString &file)
     langFile = file;
 }
 
+const QString GNUSyntaxHighlighter::getMappedFileName(const QString &lang)
+{
+    std::string file = getLangMap()->getMappedFileName(lang.toStdString());
+    return QString(file.c_str());
+}
+
+const QStringList GNUSyntaxHighlighter::getLangNames()
+{
+    QStringList retList;
+    std::set<std::string> langs = getLangMap()->getLangNames();
+    for (std::set<std::string>::iterator it = langs.begin(); it != langs.end(); ++it) {
+        retList << it->c_str();
+    }
+    return retList;
+}
+
 const QString GNUSyntaxHighlighter::getLangDefFileFromFileName(const QString &filename)
 {
     std::string file = filename.toStdString();
