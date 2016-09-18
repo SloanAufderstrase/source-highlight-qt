@@ -12,11 +12,15 @@ public:
     void lineNumberAreaPaintEvent(QPaintEvent *event);
     int lineNumberAreaWidth();
 
-    void setColorLineNumberArea(const QString &fg, const QString &bg);
-    void setTabWidth(int spaces);
+    void setColorLineNumberArea(const QString &, const QString &);
+    void setTabWidth(int);
+    bool tabWidth();
+    void setSpaceAsTab(bool);
+    bool spaceAsTab();
 
 protected:
     void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
+    void keyPressEvent(QKeyEvent *e) Q_DECL_OVERRIDE;
 
 private slots:
     void updateLineNumberAreaWidth(int newBlockCount);
@@ -25,11 +29,14 @@ private slots:
 
 private:
     QWidget *m_lineNumberArea;
-    QColor m_colorCurrentLine;
-    QColor m_colorLineNumberAreaBackground;
-    QColor m_colorLineNumberAreaForeground;
+    QColor   m_colorCurrentLine;
+    QColor   m_colorLineNumberAreaBackground;
+    QColor   m_colorLineNumberAreaForeground;
+    bool     m_spaceAsTab = false;
+    int      m_tabWidth = 4;
 
     void setColor(const QString &color, QColor &colorObject);
+    void indentSelected(QKeyEvent *event);
 };
 
 #endif//__SOURCEEDITOR_H__

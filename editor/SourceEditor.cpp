@@ -27,6 +27,7 @@ SourceEditor::SourceEditor(QWidget *parent) : QPlainTextEdit(parent)
     updateLineNumberAreaWidth(0);
     highlightCurrentLine();
     setTabWidth(4);
+    m_spaceAsTab = true;
 }
 
 SourceEditor::~SourceEditor()
@@ -74,6 +75,54 @@ void SourceEditor::resizeEvent(QResizeEvent *event)
     m_lineNumberArea->setGeometry(QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
 }
 
+void SourceEditor::indentSelected(QKeyEvent *event)
+{ 
+    QString tabChar = m_spaceAsTab ? QString().fill(' ', m_tabWidth) : "\t";
+    QTextCursor cursor = textCursor();
+    QTextBlock block = document()->findBlock(cursor.selectionEnd()).next();
+    QTextBlock startBlock = document()->findBlock(cursor.selectionStart());
+
+    if(block == startBlock) {
+        QPlainTextEdit::keyPressEvent(event);
+        return;
+    }
+    cursor.beginEditBlock();
+    while (block != startBlock) {
+        block = block.previous();
+        cursor.setPosition(block.position());
+        if (event->modifiers() != Qt::ShiftModifier) {
+            cursor.insertText(tabChar);
+        } else {
+            if (m_spaceAsTab) {
+                for (int i = 0; i < m_tabWidth; i++) {
+                    if(block.text()[0] == ' ') {
+                        cursor.deleteChar();
+                    }
+                }
+            } else {
+                if(block.text()[0] == '\t') {
+                    cursor.deleteChar();
+                }
+            }
+        }
+    }
+    cursor.endEditBlock();
+}
+
+void SourceEditor::keyPressEvent(QKeyEvent *event)
+{
+    switch(event->key())
+    {
+        case Qt::Key_Backtab:
+        case Qt::Key_Tab:
+            indentSelected(event);
+            break;
+        default:
+            QPlainTextEdit::keyPressEvent(event);
+            break;
+    }
+}
+
 void SourceEditor::highlightCurrentLine()
 {
     QList<QTextEdit::ExtraSelection> extraSelections;
@@ -83,9 +132,11 @@ void SourceEditor::highlightCurrentLine()
         selection.format.setBackground(m_colorCurrentLine);
         selection.format.setProperty(QTextFormat::FullWidthSelection, true);
         selection.cursor = textCursor();
-        selection.cursor.movePosition(QTextCursor::StartOfBlock);
-        selection.cursor.movePosition(QTextCursor::NextBlock, QTextCursor::KeepAnchor);
-        extraSelections.append(selection);
+        if(!selection.cursor.hasSelection()) {
+            selection.cursor.movePosition(QTextCursor::StartOfBlock);
+            selection.cursor.movePosition(QTextCursor::NextBlock, QTextCursor::KeepAnchor);
+            extraSelections.append(selection);
+        }
     }
 
     setExtraSelections(extraSelections);
@@ -141,9 +192,28 @@ void SourceEditor::setColorLineNumberArea(const QString &fg, const QString &bg)
 void SourceEditor::setTabWidth(int spaces)
 {
     QFontMetrics fontMetric(font());
+    m_tabWidth = spaces;
     setTabStopWidth(spaces * fontMetric.width(' '));
 }
 
+bool SourceEditor::tabWidth()
+{
+    return m_tabWidth;
+}
+
+void SourceEditor::setSpaceAsTab(bool on)
+{
+    if (on) {
+        m_spaceAsTab = true;
+    } else {
+        m_spaceAsTab = false;
+    }
+}
+
+bool SourceEditor::spaceAsTab()
+{
+    return m_spaceAsTab;
+}
 //void SourceEditor::setLineNumberAreaPadding(int left, int right)
 //{
     
